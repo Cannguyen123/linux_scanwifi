@@ -63,7 +63,6 @@ class MainWindow(QMainWindow):
 
         # Cài đặt biểu đồ
         self.setup_graph()
-
         # Bộ đếm thời gian cập nhật biểu đồ mỗi 10 giây
         self.graph_timer = QTimer()
         self.graph_timer.timeout.connect(self.update_graph)
@@ -93,7 +92,8 @@ class MainWindow(QMainWindow):
                 item = QTableWidgetItem(val)
                 item.setForeground(QColor("#e0e0e0"))
                 item.setBackground(QColor("#444444"))
-                item.setFont(QFont("Roboto", 11, QFont.Weight.Bold))
+                item.setFont(QFont("Arial", 11, QFont.Weight.Bold))  # ✅ Thay Roboto bằng Arial
+                #item.setFont(QFont("Roboto", 11, QFont.Weight.Bold))
                 item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
                 self.ui.tableWidget.setItem(row, col, item)
 

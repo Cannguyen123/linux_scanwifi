@@ -61,7 +61,8 @@ def find_strongest_ap(wifi_list):
 # Hàm lấy SSID hiện tại mà máy đang kết nối (Windows)
 def get_current_ssid():
     try:
-        output = subprocess.check_output("netsh wlan show interfaces", shell=True).decode('utf-8', errors='ignore')
+        output = subprocess.check_output("netsh wlan show interfaces", shell=True, encoding="mbcs", errors="replace")
+
         for line in output.split('\n'):
             if "SSID" in line and "BSSID" not in line:
                 ssid = line.split(":")[1].strip()
@@ -101,6 +102,7 @@ def connect_to_wifi(iface, ssid, password=""):
     return iface.status() == const.IFACE_CONNECTED
 
 
+
 # Hàm tổng hợp thông tin về Wi-Fi hiện tại: danh sách mạng, mạng mạnh nhất và mạng đang kết nối
 def get_wifi_info():
     iface = initialize_wifi_interface()
@@ -111,3 +113,6 @@ def get_wifi_info():
         "strongest": find_strongest_ap(wifi_list),
         "connected": get_current_ssid()
     }
+
+
+
